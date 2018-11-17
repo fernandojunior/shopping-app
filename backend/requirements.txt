@@ -1,0 +1,4 @@
+pylint==2.1.1
+flake8==3.6.0
+django==2.0.9
+djangorestframework==3.9.0

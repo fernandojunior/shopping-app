@@ -1,0 +1,12 @@
+__pycache__/
+**.env*/
+**build/
+*.egg*/
+**dist/
+**tmp/
+.pytest_cache/
+**.pth
+**.log
+*.py[cod]
+**.json
+**.sqlite*
