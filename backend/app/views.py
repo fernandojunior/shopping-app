@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
+from .models import Product, Order
 from .serializers import UserSerializer, GroupSerializer
+from .serializers import ProductSerializer, OrderSerializer
 
-
-# Create your views here.
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -19,3 +19,19 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows products to be viewed or edited.
+    """
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows orders to be viewed or edited.
+    """
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer

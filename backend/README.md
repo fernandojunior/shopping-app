@@ -15,7 +15,7 @@ make env && make install
 
 ## Usage
 
-To sync the database for the first time:
+To sync the database based on the models/migrations:
 ```sh
 make migrate
 ```
@@ -35,6 +35,8 @@ To check the source code lint (PEP8):
 make flake8 # or
 make pylint
 ```
+
+For more information, run `make help`.
 
 ## Author
 
