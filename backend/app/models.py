@@ -1,9 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Product(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
-    image_url = models.URLField(max_length=100)
+    image_url = models.URLField(max_length=200)
     current_price = models.FloatField()
 
     def __str__(self):
@@ -17,12 +20,12 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    # TODO owner = models.ForeignKey('auth.User', related_name='orders', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     credit_card_number = models.CharField(max_length=100)
     credit_card_name = models.CharField(max_length=100)
     credit_card_expiration_date = models.DateField()
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return 'Order: credit card=({}, {}, {})'.format(
@@ -35,6 +38,8 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     price = models.FloatField()
     quantity = models.IntegerField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

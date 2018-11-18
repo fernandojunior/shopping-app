@@ -15,15 +15,23 @@ make env && make install
 
 ## Usage
 
-To sync the database based on the models/migrations:
+First sync the database (sqlite) based on the models/migrations for the first time:
 ```sh
 make migrate
 ```
 
-To run the server:
+Now, create an initial user named admin with a password of password123.
+
+```sh
+python manage.py createsuperuser --email admin@example.com --username admin
+```
+
+To run the REST API service:
 ```sh
 make run
 ```
+To access the browsable API, open the url `http://127.0.0.1:8000/api-auth/login/?next=/`
+in the browser to login with the admin username.
 
 To test the server:
 ```sh
