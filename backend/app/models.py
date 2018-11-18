@@ -17,6 +17,7 @@ class Product(models.Model):
 
 
 class Order(models.Model):
+    # TODO owner = models.ForeignKey('auth.User', related_name='orders', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     credit_card_number = models.CharField(max_length=100)
