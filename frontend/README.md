@@ -28,6 +28,10 @@ npm run serve
 ```
 Now access http://localhost:8081/ in the browser
 
+To check the source code lint using eslint:
+```sh
+npm run lint
+```
 
 ## Author
 

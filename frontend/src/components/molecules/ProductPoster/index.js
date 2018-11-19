@@ -19,7 +19,7 @@ class ProductPoster extends Component {
   }
 
   render() {
-    const { url, image_url, name, current_price, showInfo, width, height } = this.props
+    const { url, image_url: imageUrl, name, current_price: currentPrice, showInfo, width, height } = this.props // eslint-disable-line
     const { hover } = this.state
 
     imageStyle.width = width
@@ -39,12 +39,12 @@ class ProductPoster extends Component {
       <div className="ProductPoster" onMouseOver={() => this.toggleHover(true)}
         onMouseLeave={() => this.toggleHover(false)}
       >
-        <Image style={imageStyle} key={url} src={image_url} responsive />
+        <Image style={imageStyle} key={url} src={imageUrl} responsive />
 
         { showInfo && hover && (
           <div className="PosterInfo">
             <div className="t5">{name}</div>
-            <div className="t7">Price: $ {current_price}</div>
+            <div className="t7">Price: $ {currentPrice}</div>
           </div>
         )
         }

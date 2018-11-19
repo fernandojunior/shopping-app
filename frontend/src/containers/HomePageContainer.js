@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import * as qs from 'query-string'
 import ProductList from '../components/organisms/ProductList'
 import NavBar from '../components/organisms/NavBar'
-import { findProductRequest as findProductRequestAction } from '../reducer/actions'
-import { getCartRequest as getCartRequestAction } from '../reducer/actions'
+import {
+  findProductRequest as findProductRequestAction,
+  getCartRequest as getCartRequestAction
+} from '../reducer/actions'
 
 class HomePageContainer extends Component {
-
   componentWillMount() {
-    const { findProductRequest, match } = this.props
+    const { findProductRequest } = this.props
     const urlQuery = qs.parse(location.search) // eslint-disable-line
     findProductRequest()
     getCartRequestAction()

@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { payRequest as payRequestAction } from '../reducer/actions'
 
-class PayForm extends React.Component {
+class PayForm extends Component {
   constructor(props, context) {
-    super(props, context);
+    super(props, context)
 
     this.state = {
-      credit_card_number: null,
-      credit_card_name: null,
-      credit_card_expiration_date: null,
-      was_payed: false,
+      creditCardNumber: null,
+      creditCardName: null,
+      creditCardExpirationDate: null,
+      wasPayed: false,
       error: null
     }
     this.handleChange1 = this.handleChange1.bind(this)
@@ -21,64 +21,73 @@ class PayForm extends React.Component {
   }
 
   handleChange1(event) {
-    this.setState({credit_card_number: event.target.value});
+    this.setState({ creditCardNumber: event.target.value })
   }
+
   handleChange2(event) {
-    this.setState({credit_card_name: event.target.value});
+    this.setState({ creditCardName: event.target.value })
   }
+
   handleChange3(event) {
-    this.setState({credit_card_expiration_date: event.target.value});
+    this.setState({ creditCardExpirationDate: event.target.value })
   }
 
   async handleSubmit() {
-    const { cart } = this.props
-    cart.credit_card_number = this.state.credit_card_number
-    cart.credit_card_name = this.state.credit_card_name
-    cart.credit_card_expiration_date = this.state.credit_card_expiration_date
+    const { cart, payRequest } = this.props
+    const { creditCardNumber, creditCardName, creditCardExpirationDate } = this.state
+    cart.credit_card_number = creditCardNumber
+    cart.credit_card_name = creditCardName
+    cart.credit_card_expiration_date = creditCardExpirationDate
 
     const successCallback = () => {
-      this.setState({was_payed: true});
+      this.setState({ wasPayed: true })
     }
     const errorCallback = (error) => {
-      this.setState({was_payed: false, error: `Please, fill the inputs correctly \n ${error}`});
+      this.setState({ wasPayed: false, error: `Please, fill the inputs correctly \n ${error}` })
     }
 
-    this.props.payRequest(cart, successCallback, errorCallback)
+    payRequest(cart, successCallback, errorCallback)
   }
 
   render() {
+    const {
+      wasPayed,
+      creditCardNumber,
+      creditCardName,
+      creditCardExpirationDate,
+      error
+    } = this.state
+
     return (
       <div>
-      { this.state.was_payed == false &&
-        (
-          <form onSubmit={this.handleSubmit}>
-          <label >credit card number:</label>
-          <input style={{ color: 'black' }} type="text" name="credit_card_number" onChange={this.handleChange1} />
-          <label>credit card name:</label>
-          <input style={{ color: 'black' }} type="text" name="credit_card_name" onChange={this.handleChange2} />
-          <label>credit card exp. date (yyyy-mm-dd):</label>
-          <input style={{ color: 'black' }} type="text" name="credit_card_expiration_date" onChange={this.handleChange3} />
-          <br/>
-          {
-            this.state.credit_card_number != null && this.state.credit_card_name != null && this.state.credit_card_expiration_date != null &&
-            (
-              <input  style={{ color: 'black' }} type="button" onClick={this.handleSubmit} value="Pay!" />
-            )
-          }
-          {this.state.error}
-        </form>
-        )
-      }
-      <br/>
-        {
-          this.state.was_payed && ("Cart products were ordered! ")
+        { wasPayed === false
+          && (
+            <form onSubmit={this.handleSubmit}>
+              credit card number:
+              <input style={{ color: 'black' }} type="text" name="credit_card_number" onChange={this.handleChange1} />
+              credit card name:
+              <input style={{ color: 'black' }} type="text" name="credit_card_name" onChange={this.handleChange2} />
+              credit card exp. date (yyyy-mm-dd):
+              <input style={{ color: 'black' }} type="text" name="credit_card_expiration_date" onChange={this.handleChange3} />
+              <br />
+              {
+                creditCardNumber != null
+                && creditCardName != null
+                && creditCardExpirationDate != null
+                && (<input style={{ color: 'black' }} type="button" onClick={this.handleSubmit} value="Pay!" />)
+              }
+              {error}
+            </form>
+          )
         }
-        <br/>
-        <Link to={'/'}>
-          Back
-        </Link>
+        <br />
+        {
+          wasPayed && ('Cart products were ordered! ')
+        }
+        <br />
+        <Link to="/"> Back </Link>
       </div>
-    );
+    )
   }
 }
 

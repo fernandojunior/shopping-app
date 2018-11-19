@@ -7,18 +7,18 @@ export const actionTypes = {
 }
 
 export const findProductRequest = () => (async (dispatch) => {
-  await StoreService.create_products()
+  await StoreService.loadProducts()
   const products = await StoreService.findProducts()
   return dispatch({ type: actionTypes.FIND_PRODUCT_SUCCESS, products })
 })
 
-export const addCartItemRequest = (product_url, price = 1.0, quantity = 1) => (async (dispatch) => {
-  return dispatch({ type: actionTypes.ADD_CART_ITEM, cart_item: { product: product_url, price, quantity } })
-})
+export const addCartItemRequest = (productUrl, price = 1.0, quantity = 1) => async dispatch => (
+  dispatch({ type: actionTypes.ADD_CART_ITEM, cart_item: { product: productUrl, price, quantity } })
+)
 
-export const getCartRequest = () => (async (dispatch) => {
-  return dispatch({ type: actionTypes.GET_CART })
-})
+export const getCartRequest = () => async dispatch => (
+  dispatch({ type: actionTypes.GET_CART })
+)
 
 export const payRequest = (cart, success, errorCallback) => (async (dispatch) => {
   try {
@@ -32,5 +32,6 @@ export const payRequest = (cart, success, errorCallback) => (async (dispatch) =>
     }
 
     errorCallback(errorStr)
+    throw error
   }
 })

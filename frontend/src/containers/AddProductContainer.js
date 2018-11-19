@@ -5,17 +5,14 @@ import { addCartItemRequest as addCartItemRequestAction } from '../reducer/actio
 
 class MovieDetailContainer extends Component {
   componentWillMount() {
-    const { addCartItemRequest, match, cart } = this.props
+    const { addCartItemRequest, history } = this.props
     const urlQuery = qs.parse(location.search) // eslint-disable-line
 
-    if ('url' in urlQuery ) {
+    if ('url' in urlQuery) {
       addCartItemRequest(urlQuery.url)
     }
 
-    this.props.history.push({
-      pathname: '/',
-      search: '?'
-    })    
+    history.push({ pathname: '/', search: '?' })
   }
 
   render() {
@@ -32,8 +29,8 @@ const mapStateToProps = ({ cartStore }) => ({
 })
 
 const mapDispatchToProps = (dispatch, { done }) => ({
-  addCartItemRequest: (product_url) => {
-    dispatch(addCartItemRequestAction(product_url)).then(done, done)
+  addCartItemRequest: (productUrl) => {
+    dispatch(addCartItemRequestAction(productUrl)).then(done, done)
   }
 })
 
