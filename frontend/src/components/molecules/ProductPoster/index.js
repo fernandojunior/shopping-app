@@ -19,7 +19,7 @@ class ProductPoster extends Component {
   }
 
   render() {
-    const { url, image_url, name, price, showInfo, width, height } = this.props
+    const { url, image_url, name, current_price, showInfo, width, height } = this.props
     const { hover } = this.state
 
     imageStyle.width = width
@@ -44,7 +44,7 @@ class ProductPoster extends Component {
         { showInfo && hover && (
           <div className="PosterInfo">
             <div className="t5">{name}</div>
-            <div className="t7">{price}</div>
+            <div className="t7">Price: $ {current_price}</div>
           </div>
         )
         }

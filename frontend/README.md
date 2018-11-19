@@ -22,6 +22,13 @@ To create a production build:
 npm run build
 ```
 
+To serve the build directory using a Python SimpleHTTPServer:
+```sh
+npm run serve
+```
+Now access http://localhost:8081/ in the browser
+
+
 ## Author
 
 - Fernando Felix do Nascimento Junior

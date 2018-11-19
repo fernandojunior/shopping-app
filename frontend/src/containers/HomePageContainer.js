@@ -6,7 +6,7 @@ import NavBar from '../components/organisms/NavBar'
 import { findProductRequest as findProductRequestAction } from '../reducer/actions'
 import { getCartRequest as getCartRequestAction } from '../reducer/actions'
 
-class ProductListContainer extends Component {
+class HomePageContainer extends Component {
 
   componentWillMount() {
     const { findProductRequest, match } = this.props
@@ -41,4 +41,4 @@ const mapDispatchToProps = (dispatch, { done }) => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductListContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(HomePageContainer)

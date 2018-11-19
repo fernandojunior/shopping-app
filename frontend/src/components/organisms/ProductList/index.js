@@ -7,11 +7,10 @@ import './index.css'
 
 export default (props) => {
   const { products, title } = props
-
   const shape = { width: '156px', height: '234px' }
 
   const productViews = (products || []).map(product => (
-    <Col className="desktop" xs={2} key={product.imdbID}>
+    <Col className="desktop" xs={2} key={product.url}>
       <Link to={`/add-product/?url=${product.url}`}>
         <ProductPoster {...({ ...product, ...shape })} showInfo responsive />
       </Link>
@@ -24,7 +23,7 @@ export default (props) => {
         <Row style={{ display: 'flex', flexWrap: 'wrap' }}>
           <Col xs={12}>
             <div className="t3 opacity50">
-              {(title || 'Online Movie Shopping')}
+              {(title || 'Online Movie Store')}
             </div>
           </Col>
           { productViews.length > 0 && productViews }

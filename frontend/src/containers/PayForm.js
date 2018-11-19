@@ -7,18 +7,17 @@ class PayForm extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    // this.handleChange = this.handleChange.bind(this);
-
     this.state = {
       credit_card_number: null,
       credit_card_name: null,
       credit_card_expiration_date: null,
-      was_payed: false
-    };
-    this.handleChange1 = this.handleChange1.bind(this);
-    this.handleChange2 = this.handleChange2.bind(this);
-    this.handleChange3 = this.handleChange3.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+      was_payed: false,
+      error: null
+    }
+    this.handleChange1 = this.handleChange1.bind(this)
+    this.handleChange2 = this.handleChange2.bind(this)
+    this.handleChange3 = this.handleChange3.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange1(event) {
@@ -36,10 +35,15 @@ class PayForm extends React.Component {
     cart.credit_card_number = this.state.credit_card_number
     cart.credit_card_name = this.state.credit_card_name
     cart.credit_card_expiration_date = this.state.credit_card_expiration_date
-    await this.props.payRequest(cart)
-    this.setState({was_payed: true});
 
-    // event.preventDefault();
+    const successCallback = () => {
+      this.setState({was_payed: true});
+    }
+    const errorCallback = (error) => {
+      this.setState({was_payed: false, error: `Please, fill the inputs correctly \n ${error}`});
+    }
+
+    this.props.payRequest(cart, successCallback, errorCallback)
   }
 
   render() {
@@ -54,10 +58,14 @@ class PayForm extends React.Component {
           <input style={{ color: 'black' }} type="text" name="credit_card_name" onChange={this.handleChange2} />
           <label>credit card exp. date (yyyy-mm-dd):</label>
           <input style={{ color: 'black' }} type="text" name="credit_card_expiration_date" onChange={this.handleChange3} />
+          <br/>
           {
             this.state.credit_card_number != null && this.state.credit_card_name != null && this.state.credit_card_expiration_date != null &&
-            (<input  style={{ color: 'black' }} type="button" onClick={this.handleSubmit} value="Pay!" />)
+            (
+              <input  style={{ color: 'black' }} type="button" onClick={this.handleSubmit} value="Pay!" />
+            )
           }
+          {this.state.error}
         </form>
         )
       }
@@ -74,20 +82,13 @@ class PayForm extends React.Component {
   }
 }
 
-const mapStateToProps = ({ productStore, cartStore }) => ({
-  products: productStore.products,
+const mapStateToProps = ({ cartStore }) => ({
   cart: cartStore.cart
 })
 
 const mapDispatchToProps = (dispatch, { done }) => ({
-  findProductRequest: () => {
-    dispatch(findProductRequestAction()).then(done, done)
-  },
-  getCartRequest: () => {
-    dispatch(getCartRequestAction()).then(done, done)
-  },
-  payRequest: (cart) => {
-    dispatch(payRequestAction(cart)).then(done, done)
+  payRequest: (cart, successCallback, errorCallback) => {
+    dispatch(payRequestAction(cart, successCallback, errorCallback)).then(done, done)
   }
 })
 

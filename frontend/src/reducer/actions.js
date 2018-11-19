@@ -20,7 +20,17 @@ export const getCartRequest = () => (async (dispatch) => {
   return dispatch({ type: actionTypes.GET_CART })
 })
 
-export const payRequest = (cart) => (async (dispatch) => {
-  await StoreService.pay(cart)
-  return dispatch({ type: actionTypes.PAY_SUCCESS })
+export const payRequest = (cart, success, errorCallback) => (async (dispatch) => {
+  try {
+    await StoreService.pay(cart)
+    success()
+    return dispatch({ type: actionTypes.PAY_SUCCESS })
+  } catch (error) {
+    let errorStr = ''
+    if ('data' in error) {
+      errorStr = Object.keys(error.data).map(k => `${k}: ${error.data[k][0]}`).join(',')
+    }
+
+    errorCallback(errorStr)
+  }
 })
