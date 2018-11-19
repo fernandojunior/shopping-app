@@ -25,9 +25,9 @@ Now, create an initial user named admin with a password of password123.
 ```sh
 make createsuperuser
 ```
-To run the REST API service:
+To start the REST API service:
 ```sh
-make run
+make start
 ```
 To access the browsable API, open the url `http://127.0.0.1:8000/api-auth/login/?next=/`
 in the browser to login with the admin username.

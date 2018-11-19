@@ -8,7 +8,7 @@ help:
 	@echo '  migrate          Sync the database for the first time.'
 	@echo '  makemigrations   Create new migrations based on the changes detected to your models.'
 	@echo '  createsuperuser  Create new server admin super user.'
-	@echo '  run              Start the django server.'
+	@echo '  start            Start the django server.'
 	@echo '  flake8           Check code style using flake8 and pylint.'
 	@echo '  flake8           Check code style using flake8.'
 	@echo '  pylint           Check code style using pylint.'
@@ -58,7 +58,7 @@ pylint:
 test:
 	. .env/bin/activate && python manage.py test
 
-run:
+start:
 	. .env/bin/activate && python manage.py runserver
 
 migrate:
