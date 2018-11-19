@@ -23,7 +23,7 @@ make migrate
 Now, create an initial user named admin with a password of password123.
 
 ```sh
-python manage.py createsuperuser --email admin@example.com --username admin
+. .env/bin/activate && python manage.py createsuperuser --email admin@example.com --username admin
 ```
 
 To run the REST API service:
@@ -38,10 +38,9 @@ To test the server:
 make test
 ```
 
-To check the source code lint (PEP8):
+To check the source code lint (PEP8) using flake8 and pylint:
 ```sh
-make flake8 # or
-make pylint
+make lint
 ```
 
 For more information, run `make help`.

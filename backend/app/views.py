@@ -8,6 +8,12 @@ from .serializers import ProductSerializer, OrderSerializer
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
+
+    POST request body example:
+        {
+            "username": "xxx",
+            "email": "xxx@example.com"
+        }
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer

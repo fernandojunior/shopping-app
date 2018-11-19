@@ -8,6 +8,6 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 urlpatterns = [
     url(r'^', include('app.urls')),
     path('api-auth/', include('rest_framework.urls')),
-    path('login/', obtain_jwt_token),
+    path('login/', obtain_jwt_token, name='login'),
     path('refresh-token/', refresh_jwt_token),
 ]

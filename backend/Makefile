@@ -8,6 +8,7 @@ help:
 	@echo '  migrate          Sync the database for the first time.'
 	@echo '  makemigrations   Create new migrations based on the changes detected to your models.'
 	@echo '  run              Start the django server.'
+	@echo '  flake8           Check code style using flake8 and pylint.'
 	@echo '  flake8           Check code style using flake8.'
 	@echo '  pylint           Check code style using pylint.'
 	@echo '  test             Run tests.'
@@ -45,12 +46,13 @@ install:
 		. .env/bin/activate && pip install -r requirements.txt \
 		|| echo "requirements.txt doesn't exists"
 
+lint: flake8 pylint
+
 flake8:
 	. .env/bin/activate && flake8 --show-source --count
 
 pylint:
-	. .env/bin/activate
-	pylint api app --load-plugins pylint_django --disable=missing-docstring,too-few-public-methods,too-many-ancestors
+	. .env/bin/activate && pylint api app --load-plugins pylint_django --disable=missing-docstring,too-few-public-methods,too-many-ancestors,no-member
 
 test:
 	. .env/bin/activate && python manage.py test
