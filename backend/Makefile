@@ -7,6 +7,7 @@ help:
 	@echo '  install          Install dependencies into virtualenv.'
 	@echo '  migrate          Sync the database for the first time.'
 	@echo '  makemigrations   Create new migrations based on the changes detected to your models.'
+	@echo '  createsuperuser  Create new server admin super user.'
 	@echo '  run              Start the django server.'
 	@echo '  flake8           Check code style using flake8 and pylint.'
 	@echo '  flake8           Check code style using flake8.'
@@ -37,9 +38,9 @@ clean-pyc:
 	find . -name '__pycache__' -exec rm -fr {} +
 
 env:
-	sudo apt-get -y install python3-pip
-	sudo pip3 install virtualenv
-	virtualenv .env
+	# sudo apt-get -y install python3-pip
+	# sudo pip3 install virtualenv
+	virtualenv -p python3 .env
 
 install:
 	test -f requirements.txt && \
@@ -65,3 +66,7 @@ migrate:
 
 makemigrations:
 	. .env/bin/activate && python manage.py makemigrations
+
+createsuperuser:
+	. .env/bin/activate && python manage.py createsuperuser --email admin@example.com --username admin
+

@@ -23,9 +23,8 @@ make migrate
 Now, create an initial user named admin with a password of password123.
 
 ```sh
-. .env/bin/activate && python manage.py createsuperuser --email admin@example.com --username admin
+make createsuperuser
 ```
-
 To run the REST API service:
 ```sh
 make run
