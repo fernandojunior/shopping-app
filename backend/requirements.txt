@@ -5,3 +5,4 @@ django==2.0.9
 djangorestframework==3.9.0
 djangorestframework-jwt==1.11.0
 django-nose==1.4.6
+django-cors-headers==2.4.0

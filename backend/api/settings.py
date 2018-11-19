@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_nose',
+    'corsheaders',
     'app'
 ]
 
@@ -51,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'api.urls'
@@ -146,3 +149,7 @@ JWT_AUTH = {
 # Test runner settings
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Cors settings
+
+CORS_ORIGIN_ALLOW_ALL = True
