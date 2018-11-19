@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_nose',
     'app'
 ]
 
@@ -141,3 +142,7 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_EXPIRATION_DELTA': timedelta(days=2),
 }
+
+# Test runner settings
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
